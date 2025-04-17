@@ -74,8 +74,6 @@ Make sure to configure your MongoDB connection details in your code as needed. T
 
 
 ## Part One:
-Run the main script:
-
 
 ### class diagram:
 ![Image description](https://github.com/MarwanHalabi/lennar/blob/main/part_one/classDiagram.png
@@ -154,6 +152,6 @@ Failure (404):
 .......
 
 ### Resorces.
-1. stack over flow
-2. google
+1. prior knowledge
+2. web research
 
