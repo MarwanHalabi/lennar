@@ -68,8 +68,9 @@ pip install -e .
 Verify Entry Points: After installation, you should be able to run your scripts using the following commands:
 
 ```bash
-run-part_one
+run-part1
 run-part2
+run-part3
 ```
 
 If you want to install dependencies for each part individually, navigate to each part's directory and run:
@@ -81,7 +82,10 @@ pip install -r requirements.txt
 cd ../part_two
 pip install -r requirements.txt
 ```
-
+```bash
+cd ../part_three
+pip install -r requirements.txt
+```
 ## Connecting to MongoDB
 
 Local MongoDB Setup
@@ -104,7 +108,7 @@ Make sure to configure your MongoDB connection details in your code as needed. T
 Run the main script:
 
 ```bash
-run-part_one
+run-part1
 ```
 This script will extract and format candidate data as specified.
 
@@ -112,6 +116,12 @@ This script will extract and format candidate data as specified.
 Run the main script:
 ```bash
 run-part2
+```
+
+### Part Three:
+Run the main script:
+```bash
+run-part3
 ```
 This script will filter candidates based on industry, skills, and experience, and store the filtered results in MongoDB.
 
