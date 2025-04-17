@@ -75,7 +75,7 @@ run-part3
 
 If you want to install dependencies for each part individually, navigate to each part's directory and run:
 ```bash
-cd part_one
+cd ../part_one
 pip install -r requirements.txt
 ```
 ```bash
