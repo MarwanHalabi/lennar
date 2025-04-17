@@ -78,7 +78,8 @@ Run the main script:
 
 
 ### class diagram:
-![alt text]([[http://url/to/img.png](https://github.com/MarwanHalabi/lennar/blob/main/part_one/classDiagram.png)])
+![Image description](https://github.com/MarwanHalabi/lennar/blob/main/part_one/classDiagram.png
+)
 
 ### Database schema, MongoDB
 #### trucks Collection
