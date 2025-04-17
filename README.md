@@ -2,8 +2,7 @@
 
 ## Overview
 
-This project is divided into two parts, each with its own functionality related to candidate data processing and filtering. This README provides instructions on how to set up, run, and utilize each part of the project.
-
+This project is divided into multiple parts, each with its own functionality related to candidate data processing, filtering, and truck/package assignment, utilizing APIs and MongoDB for data storage and operations. This README provides instructions on how to set up, run, and utilize each part of the project.
 ---
 
 ## Project Structure
@@ -13,34 +12,25 @@ Lenar_home_assignment/
 
 ├── utils/
 │   ├── __init__.py
-│   ├── fetch_data_from_url.py
+│   ├── utils.py
 │
 ├── part_1/
 │   ├── __init__.py
-│   ├── candidate_data.py
-│   ├── extractor.py
-│   ├── formatter.py
-│   ├── main.py
-│   ├── utils.py
-│   └── requirements.txt
+│   ├── class_diagram.md
+│   └── class_diagram.png
 │
 ├── part_2/
 │   ├── __init__.py
-│   ├──filter.py
+│   ├──app.py
 │   ├── main.py
-│   ├── mongo_integrtion.py
+│   ├── models.py
 │   └── requirements.txt
 |
 ├── tests/
 │   └──__init__.py
-│     └── tests_part_one/
-│       └── test_part_one.py
 │     └── tests_part_two/
 │       ├── __init__.py
-│       ├── test_filter.py
-│       ├── test_mongo_integration.py
-│       └── test_main.py
-│
+│       └── test_part_two.py
 ├── README.md
 └── setup.py
 ```
@@ -65,27 +55,7 @@ cd lennar
 ```bash
 pip install -e .
 ```
-Verify Entry Points: After installation, you should be able to run your scripts using the following commands:
 
-```bash
-run-part1
-run-part2
-run-part3
-```
-
-If you want to install dependencies for each part individually, navigate to each part's directory and run:
-```bash
-cd ../part_one
-pip install -r requirements.txt
-```
-```bash
-cd ../part_two
-pip install -r requirements.txt
-```
-```bash
-cd ../part_three
-pip install -r requirements.txt
-```
 ## Connecting to MongoDB
 
 Local MongoDB Setup
@@ -103,26 +73,86 @@ MongoDB Configuration:
 Make sure to configure your MongoDB connection details in your code as needed. The default connection is typically mongodb://localhost:27017/
 
 
-## How to Run
-### Part One:
+## Part One:
 Run the main script:
 
-```bash
-run-part1
-```
-This script will extract and format candidate data as specified.
 
-### Part Two:
-Run the main script:
-```bash
-run-part2
+### class diagram:
+[//]: # (part_one/classDiagram.png)
+
+### Database schema, MongoDB
+#### trucks Collection
+```
+{
+  "_id": "uuid",              // UUID string (auto-generated)
+  "length": 10.0,             // Length of the truck in meters
+  "width": 5.0,               // Width of the truck in meters
+  "height": 4.0,              // Height of the truck in meters
+  "is_full": false            // Whether the truck is full or available for new assignments
+}
+
 ```
 
-### Part Three:
-Run the main script:
-```bash
-run-part3
+#### packages Collection
+This collection stores the packages that need to be assigned to trucks.
 ```
-This script will filter candidates based on industry, skills, and experience, and store the filtered results in MongoDB.
+{
+  "_id": "uuid",              // UUID string (auto-generated)
+  "length": 2.0,              // Length of the package in meters
+  "width": 1.0,               // Width of the package in meters
+  "height": 1.0,              // Height of the package in meters
+  "truck_id": "uuid",         // Nullable, references trucks._id (truck the package is assigned to)
+}
 
+```
+
+### Request Flow of assigning Packages to Truck 
+1. client send a request to add package ids
+2. server receives the request (POST /assign-truck)
+3. lookup, fetch and validate package
+4. calcualte valuome
+5. fetch trucks
+6. check if any truck can handle the load -> assign the (first) truck ID to the packages -> return 200.
+7. if There is no avilable trick return "delayed until the next day"
+
+
+
+### API Endpoints
+1. POST /assign_truck
+This endpoint assigns packages to a truck.
+
+Request:
+URL: /assign-truck
+
+Method: POST
+
+Body (JSON):
+```
+{
+  "package_ids": ["package_id_1", "package_id_2"]
+}
+```
+Response:
+Success (200):
+
+```
+{
+  "message": "Packages successfully assigned to truck",
+  "truck": "truck_id"
+}
+```
+Failure (404):
+
+```
+{
+  "message": "No suitable truck found. Packages delayed."
+}
+```
+
+2. GET /available-trucks
+.......
+
+### Resorces.
+1. stack over flow
+2. google
 
