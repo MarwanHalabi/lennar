@@ -183,3 +183,6 @@ Failure (404):
 }
 ```
 
+### Resorces.
+1. prior knowledge
+2. web research
