@@ -117,7 +117,41 @@ This collection stores the packages that need to be assigned to trucks.
 
 
 ### API Endpoints
-1. POST /assign_truck
+1. POST /add_truck
+Add a new truck to the system.
+#### Request Body
+```
+{
+  "length": 10.0,
+  "width": 5.0,
+  "height": 4.0
+}
+```
+#### Response
+```
+{
+  "id": "mongo_object_id"
+}
+```
+
+2. POST /add_package
+Add a new package to be assigned to a truck.
+#### Request Body
+```
+{
+  "length": 10.0,
+  "width": 5.0,
+  "height": 4.0
+}
+```
+#### Response
+```
+{
+  "id": "mongo_object_id"
+}
+```
+
+3. POST /assign_truck
 This endpoint assigns packages to a truck.
 
 Request:
@@ -136,8 +170,9 @@ Success (200):
 
 ```
 {
-  "message": "Packages successfully assigned to truck",
-  "truck": "truck_id"
+  "truck": "truck_id",
+  "fill_ratio": 0.85,
+  "packages_count": 3
 }
 ```
 Failure (404):
@@ -147,11 +182,4 @@ Failure (404):
   "message": "No suitable truck found. Packages delayed."
 }
 ```
-
-2. GET /available-trucks
-.......
-
-### Resorces.
-1. prior knowledge
-2. web research
 
