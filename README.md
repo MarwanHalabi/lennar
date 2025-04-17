@@ -78,7 +78,7 @@ Run the main script:
 
 
 ### class diagram:
-[//]: # (part_one/classDiagram.png)
+part_one/classDiagram.png
 
 ### Database schema, MongoDB
 #### trucks Collection
